@@ -4,10 +4,13 @@
  */
 package com.bloom.bloomspringbootdemo.dubbo;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author taosy
  * Created by on 2022-01-12 下午4:41
  */
+@Component
 public class DemoManagerImpl implements DemoManager {
 
     @Override

@@ -13,7 +13,6 @@ import java.lang.reflect.Parameter;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtField;
@@ -77,8 +76,7 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
             for (BeanDefinition candidate : candidates) {
                 try {
                     Class<?> clazz = classLoader.loadClass(candidate.getBeanClassName());
-                    beanDefinitions
-                        .add(registerBean(getRegistry(), null, getClass(clazz)));
+                    beanDefinitions.add(registerBean(getRegistry(), null, getClass(clazz)));
                 } catch (ClassNotFoundException e) {
                     throw new BeanCreationException(e.getMessage(), e);
                 }
@@ -114,7 +112,7 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
         bodyAttr.addAnnotation(componentAnnotation);
 
         Annotation validatedAnnotation = new Annotation(
-            "com.bloom.bloomspringbootdemo.dubbo.Validated", constPool);
+            "org.springframework.validation.annotation.Validated", constPool);
         bodyAttr.addAnnotation(validatedAnnotation);
 
         Annotation serviceAnnotation = new Annotation("org.apache.dubbo.config.annotation.Service",
@@ -178,7 +176,7 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
                                   + method.getName() + "(" + args + ") { " + body + "}";
             CtMethod ctMethod = CtNewMethod.make(methodString, ctClass);
             // 给所有的参数加入@Name, validation会用到
-            //            addNameAnnotationToParameters(ctMethod, method, constPool);
+            addNameAnnotationToParameters(ctMethod, method, constPool);
             ctClass.addMethod(ctMethod);
         }
         return ctClass;
@@ -189,27 +187,27 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
         return genDubboServiceClass(resultDubboServiceClass).toClass();
     }
 
-    //    private static void addNameAnnotationToParameters(CtMethod ctMethod, Method method,
-    //                                                      ConstPool constPool) {
-    //        if (method.getParameterCount() == 0) {
-    //            return;
-    //        }
-    //        ParameterAnnotationsAttribute parameterAtrribute = new ParameterAnnotationsAttribute(
-    //                constPool, ParameterAnnotationsAttribute.visibleTag);
-    //        Annotation[][] annotations = new Annotation[method.getParameterCount()][1];
-    //        Parameter[] parameters = method.getParameters();
-    //        for (int i = 0; i < method.getParameterCount(); i++) {
-    //            Annotation name = new Annotation("com.guahao.convention.validation.Name", constPool);
-    //            String parameterName = parameters[i].getName();
-    //            if (parameters[i].isAnnotationPresent(Name.class)) {
-    //                parameterName = parameters[i].getAnnotation(Name.class).value();
-    //            }
-    //            name.addMemberValue("value", new StringMemberValue(parameterName, constPool));
-    //            annotations[i][0] = name;
-    //        }
-    //        parameterAtrribute.setAnnotations(annotations);
-    //        ctMethod.getMethodInfo().addAttribute(parameterAtrribute);
-    //    }
+    private static void addNameAnnotationToParameters(CtMethod ctMethod, Method method,
+                                                      ConstPool constPool) {
+        if (method.getParameterCount() == 0) {
+            return;
+        }
+        ParameterAnnotationsAttribute parameterAtrribute = new ParameterAnnotationsAttribute(
+            constPool, ParameterAnnotationsAttribute.visibleTag);
+        Annotation[][] annotations = new Annotation[method.getParameterCount()][1];
+        Parameter[] parameters = method.getParameters();
+        for (int i = 0; i < method.getParameterCount(); i++) {
+            Annotation name = new Annotation("com.bloom.bloomspringbootdemo.dubbo.Name", constPool);
+            String parameterName = parameters[i].getName();
+            if (parameters[i].isAnnotationPresent(Name.class)) {
+                parameterName = parameters[i].getAnnotation(Name.class).value();
+            }
+            name.addMemberValue("value", new StringMemberValue(parameterName, constPool));
+            annotations[i][0] = name;
+        }
+        parameterAtrribute.setAnnotations(annotations);
+        ctMethod.getMethodInfo().addAttribute(parameterAtrribute);
+    }
 
     private static String getArgsString(Method member, Class<?> managerClass) {
         StringBuilder args = new StringBuilder();
@@ -229,7 +227,7 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
     private static String getBodyString(Method member, String managerFieldName) {
         StringBuilder body = new StringBuilder();
         String typeName = member.getGenericReturnType().getTypeName();
-        if ("com.bloom.bloomspringbootdemo.dubbo.Result<java.lang.Void>".equals(typeName)) {
+        if ("com.bloom.bloomspringbootdemo.dubbo.BaseResult<java.lang.Void>".equals(typeName)) {
 
             body.append(managerFieldName).append(".").append(member.getName()).append("(");
             Parameter[] parameters = member.getParameters();
@@ -240,9 +238,9 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
                 }
             }
             body.append(");");
-            body.append("return com.bloom.bloomspringbootdemo.dubbo.Results.success();");
+            body.append("return com.bloom.bloomspringbootdemo.dubbo.BaseResult.success();");
         } else {
-            body.append("return com.bloom.bloomspringbootdemo.dubbo.Results.success(");
+            body.append("return com.bloom.bloomspringbootdemo.dubbo.BaseResult.success(");
             body.append(managerFieldName).append(".").append(member.getName()).append("(");
             Parameter[] parameters = member.getParameters();
             for (int i = 0, length = member.getParameterCount(); i < length; i++) {
@@ -316,7 +314,8 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
     public static void main(String[] args) {
         CtClass ctClass = genDubboServiceClass(DemoServiceImpl.class);
         byte[] byteArr = ctClass.toBytecode();
-        FileOutputStream fos = new FileOutputStream(new File("/Users/taosy/Documents/taosy/haixin/my.class"));
+        FileOutputStream fos = new FileOutputStream(
+            new File("/Users/taosy/Documents/taosy/haixin/my.class"));
         fos.write(byteArr);
         fos.close();
         System.out.println("over!!");

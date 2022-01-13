@@ -2,7 +2,8 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package com.bloom.bloomspringbootdemo.dubbo;
+package
+        com.bloom.bloomspringbootdemo.dubbo;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -13,11 +14,11 @@ import java.lang.annotation.Target;
 
 /**
  * @author taosy
- * Created by on 2022-01-12 下午4:34
+ * Created by on 2022-01-13 下午5:32
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Inherited
 public @interface ResultService {
 

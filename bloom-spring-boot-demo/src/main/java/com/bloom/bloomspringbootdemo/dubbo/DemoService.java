@@ -10,5 +10,5 @@ package com.bloom.bloomspringbootdemo.dubbo;
  */
 public interface DemoService {
 
-    String demo(String str);
+    BaseResult<String> demo(String str);
 }

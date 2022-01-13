@@ -7,7 +7,6 @@
  */
 package com.bloom.bloomspringbootdemo.dubbo;
 
-import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -17,11 +16,8 @@ import java.lang.annotation.Target;
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface Validated {
-
-    Class<?>[] value() default {};
-
+@Target({ ElementType.PARAMETER })
+public @interface Name {
+    String value();
 }
