@@ -2,7 +2,7 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package com.bloom.bloomspringbootdemo.dubbo;
+package com.bloom.bloomspringbootdemo.valid;
 
 import java.io.Serializable;
 import java.util.List;

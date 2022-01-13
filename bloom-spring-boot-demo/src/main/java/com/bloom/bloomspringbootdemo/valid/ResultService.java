@@ -3,7 +3,7 @@
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
 package
-        com.bloom.bloomspringbootdemo.dubbo;
+        com.bloom.bloomspringbootdemo.valid;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -22,7 +22,7 @@ import java.lang.annotation.Target;
 @Inherited
 public @interface ResultService {
 
-    Class<?> managerClass();
+    Class<?> serviceClass();
 
-    Service dubboService();
+    Class<?> facadeClass();
 }

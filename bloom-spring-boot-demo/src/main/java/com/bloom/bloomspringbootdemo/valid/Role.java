@@ -2,14 +2,11 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package com.bloom.bloomspringbootdemo.dubbo;
-
-import java.util.List;
+package com.bloom.bloomspringbootdemo.valid;
 
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author taosy

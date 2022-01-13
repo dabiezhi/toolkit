@@ -2,7 +2,7 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package com.bloom.bloomspringbootdemo.dubbo;
+package com.bloom.bloomspringbootdemo.valid;
 
 import org.springframework.stereotype.Component;
 
@@ -11,10 +11,15 @@ import org.springframework.stereotype.Component;
  * Created by on 2022-01-12 下午4:41
  */
 @Component
-public class DemoManagerImpl implements DemoManager {
+public class DemoServiceImpl implements DemoService {
 
     @Override
     public String demo(String str) {
-        return str;
+        return "hello:" + str;
+    }
+
+    @Override
+    public String user(User user) {
+        return "user success!";
     }
 }

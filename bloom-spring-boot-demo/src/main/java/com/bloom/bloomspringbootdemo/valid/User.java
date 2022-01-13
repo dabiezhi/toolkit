@@ -2,7 +2,7 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package com.bloom.bloomspringbootdemo.dubbo;
+package com.bloom.bloomspringbootdemo.valid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +36,7 @@ public class User {
         Role role = new Role();
         role.setName("超管");
         List<Role> list = new ArrayList<>();
+        list.add(role);
         user.setRoleList(list);
         System.out.println(JSON.toJSONString(user));
     }

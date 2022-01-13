@@ -2,7 +2,7 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package com.bloom.bloomspringbootdemo.dubbo;
+package com.bloom.bloomspringbootdemo.valid;
 
 /**
  * @author taosy
@@ -10,5 +10,7 @@ package com.bloom.bloomspringbootdemo.dubbo;
  */
 public interface DemoService {
 
-    BaseResult<String> demo(String str);
+    String demo(String str);
+
+    String user(User user);
 }

@@ -2,7 +2,7 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package com.bloom.bloomspringbootdemo.dubbo;
+package com.bloom.bloomspringbootdemo.valid;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +26,7 @@ public enum UserStatusEnum {
     /**
      * 判断参数合法性
      */
-    public boolean isValidName(Integer name) {
+    public static boolean isValidName(Integer name) {
         for (UserStatusEnum userStatusEnum : UserStatusEnum.values()) {
             if (userStatusEnum.getVal().equals(name)) {
                 return true;

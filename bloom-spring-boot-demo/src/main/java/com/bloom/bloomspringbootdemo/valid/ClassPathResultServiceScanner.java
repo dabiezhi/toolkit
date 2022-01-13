@@ -2,7 +2,7 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package com.bloom.bloomspringbootdemo.dubbo;
+package com.bloom.bloomspringbootdemo.valid;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -107,49 +107,26 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
         // 添加类注解
         AnnotationsAttribute bodyAttr = new AnnotationsAttribute(constPool,
             AnnotationsAttribute.visibleTag);
-        Annotation componentAnnotation = new Annotation("org.springframework.stereotype.Component",
-            constPool);
+        Annotation componentAnnotation = new Annotation(
+            "org.springframework.web.bind.annotation.RestController", constPool);
         bodyAttr.addAnnotation(componentAnnotation);
 
         Annotation validatedAnnotation = new Annotation(
             "org.springframework.validation.annotation.Validated", constPool);
         bodyAttr.addAnnotation(validatedAnnotation);
 
-        Annotation serviceAnnotation = new Annotation("org.apache.dubbo.config.annotation.Service",
-            constPool);
-
         ResultService resultService = resultDubboServiceClass.getAnnotation(ResultService.class);
-
-        Method[] members = resultService.dubboService().annotationType().getMethods();
-        for (Method member : members) {
-            if (Modifier.isPublic(member.getModifiers()) && member.getParameterTypes().length == 0
-                && member.getDeclaringClass() == resultService.dubboService().annotationType()) {
-
-                try {
-                    Object value = member.invoke(resultService.dubboService());
-                    if (null != value) {
-                        MemberValue memberValue = createMemberValue(constPool,
-                            classPool.get(member.getReturnType().getName()), value);
-                        serviceAnnotation.addMemberValue(member.getName(), memberValue);
-                    }
-                } catch (IllegalAccessException | InvocationTargetException e) {
-
-                }
-            }
-        }
-        bodyAttr.addAnnotation(serviceAnnotation);
         classFile.addAttribute(bodyAttr);
 
         // 添加接口
-        ctClass
-            .addInterface(classPool.get(resultService.dubboService().interfaceClass().getName()));
+        ctClass.addInterface(classPool.get(resultService.facadeClass().getName()));
         // 添加类默认构造函数
         ctClass
             .addConstructor(CtNewConstructor.defaultConstructor(classPool.getCtClass(className)));
         // 设置字段
-        String managerFieldName = resultService.managerClass().getSimpleName().substring(0, 1)
-            .toLowerCase() + resultService.managerClass().getSimpleName().substring(1);
-        CtField ctField = CtField.make("private " + resultService.managerClass().getCanonicalName()
+        String managerFieldName = resultService.serviceClass().getSimpleName().substring(0, 1)
+            .toLowerCase() + resultService.serviceClass().getSimpleName().substring(1);
+        CtField ctField = CtField.make("private " + resultService.serviceClass().getCanonicalName()
                                        + " " + managerFieldName + ";",
             classPool.getCtClass(className));
 
@@ -162,14 +139,14 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
         ctClass.addField(ctField);
 
         // 如果是接口
-        Method[] interfaceMethods = resultService.dubboService().interfaceClass().getMethods();
+        Method[] interfaceMethods = resultService.facadeClass().getMethods();
 
         for (Method method : interfaceMethods) {
             // 添加方法, 里面进行动态代理logic
             // 验证一下方法
-            resultService.managerClass().getMethod(method.getName(), method.getParameterTypes());
+            resultService.serviceClass().getMethod(method.getName(), method.getParameterTypes());
 
-            String args = getArgsString(method, resultService.managerClass());
+            String args = getArgsString(method, resultService.serviceClass());
             String body = getBodyString(method, managerFieldName);
 
             String methodString = "public " + method.getReturnType().getTypeName() + " "
@@ -197,7 +174,7 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
         Annotation[][] annotations = new Annotation[method.getParameterCount()][1];
         Parameter[] parameters = method.getParameters();
         for (int i = 0; i < method.getParameterCount(); i++) {
-            Annotation name = new Annotation("com.bloom.bloomspringbootdemo.dubbo.Name", constPool);
+            Annotation name = new Annotation("com.bloom.bloomspringbootdemo.valid.Name", constPool);
             String parameterName = parameters[i].getName();
             if (parameters[i].isAnnotationPresent(Name.class)) {
                 parameterName = parameters[i].getAnnotation(Name.class).value();
@@ -227,7 +204,7 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
     private static String getBodyString(Method member, String managerFieldName) {
         StringBuilder body = new StringBuilder();
         String typeName = member.getGenericReturnType().getTypeName();
-        if ("com.bloom.bloomspringbootdemo.dubbo.BaseResult<java.lang.Void>".equals(typeName)) {
+        if ("com.bloom.bloomspringbootdemo.valid.BaseResult<java.lang.Void>".equals(typeName)) {
 
             body.append(managerFieldName).append(".").append(member.getName()).append("(");
             Parameter[] parameters = member.getParameters();
@@ -238,9 +215,9 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
                 }
             }
             body.append(");");
-            body.append("return com.bloom.bloomspringbootdemo.dubbo.BaseResult.success();");
+            body.append("return com.bloom.bloomspringbootdemo.valid.BaseResult.success();");
         } else {
-            body.append("return com.bloom.bloomspringbootdemo.dubbo.BaseResult.success(");
+            body.append("return com.bloom.bloomspringbootdemo.valid.BaseResult.success(");
             body.append(managerFieldName).append(".").append(member.getName()).append("(");
             Parameter[] parameters = member.getParameters();
             for (int i = 0, length = member.getParameterCount(); i < length; i++) {
@@ -312,7 +289,7 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
 
     @SneakyThrows
     public static void main(String[] args) {
-        CtClass ctClass = genDubboServiceClass(DemoServiceImpl.class);
+        CtClass ctClass = genDubboServiceClass(DemoController.class);
         byte[] byteArr = ctClass.toBytecode();
         FileOutputStream fos = new FileOutputStream(
             new File("/Users/taosy/Documents/taosy/haixin/my.class"));

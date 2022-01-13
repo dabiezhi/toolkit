@@ -2,7 +2,7 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package com.bloom.bloomspringbootdemo.dubbo;
+package com.bloom.bloomspringbootdemo.valid;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -17,9 +17,9 @@ import org.springframework.stereotype.Component;
  * Created by on 2022-01-12 下午4:50
  */
 @Component
-public class DubboBeanDefinitionRegistryPostProcessor implements
-                                                      BeanDefinitionRegistryPostProcessor,
-                                                      ApplicationContextAware {
+public class MyBeanDefinitionRegistryPostProcessor implements
+                                                   BeanDefinitionRegistryPostProcessor,
+                                                   ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     @Override
