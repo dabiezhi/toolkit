@@ -4,6 +4,8 @@
  */
 package com.bloom.bloomspringbootdemo.valid;
 
+import com.alibaba.fastjson.JSON;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,6 +22,6 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public String user(User user) {
-        return "user success!";
+        return JSON.toJSONString(user);
     }
 }

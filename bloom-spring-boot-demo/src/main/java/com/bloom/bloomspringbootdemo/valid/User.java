@@ -32,7 +32,9 @@ public class User {
 
     public static void main(String[] args) {
         User user = new User();
-        user.setType(99);
+        user.setType(1);
+        user.setName("猫");
+        user.setAge(27);
         Role role = new Role();
         role.setName("超管");
         List<Role> list = new ArrayList<>();
