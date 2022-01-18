@@ -23,5 +23,5 @@ public @interface FeignClientService {
 
     Class<?> feignClass();
 
-    Class<?> clientClass();
+//    Class<?> clientClass();
 }

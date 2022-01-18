@@ -115,7 +115,7 @@ public class ClassPathFeignClientServiceScanner extends ClassPathBeanDefinitionS
         classFile.addAttribute(bodyAttr);
 
         // 添加接口
-        ctClass.addInterface(classPool.get(feignClientService.clientClass().getName()));
+        ctClass.addInterface(classPool.get(clientClass.getInterfaces()[0].getName()));
         // 添加类默认构造函数
         ctClass
             .addConstructor(CtNewConstructor.defaultConstructor(classPool.getCtClass(className)));
@@ -136,13 +136,13 @@ public class ClassPathFeignClientServiceScanner extends ClassPathBeanDefinitionS
         ctClass.addField(ctField);
 
         // 如果是接口
-        Method[] interfaceMethods = feignClientService.clientClass().getMethods();
+        Method[] interfaceMethods = clientClass.getInterfaces()[0].getMethods();
 
         for (Method method : interfaceMethods) {
             // 添加方法, 里面进行动态代理logic
             // 验证一下方法
-            feignClientService.feignClass().getInterfaces()[0]
-                .getMethod(method.getName(), method.getParameterTypes());
+            feignClientService.feignClass().getInterfaces()[0].getMethod(method.getName(),
+                method.getParameterTypes());
 
             String args = getArgsString(method, feignClientService.feignClass());
             String body = getBodyString(method, managerFieldName);
@@ -157,7 +157,7 @@ public class ClassPathFeignClientServiceScanner extends ClassPathBeanDefinitionS
 
     @SneakyThrows
     public static Class<?> getClass(Class<?> clientClass) {
-        return  genClientClass(clientClass).toClass();
+        return genClientClass(clientClass).toClass();
     }
 
     private static String getArgsString(Method member, Class<?> managerClass) {
@@ -265,7 +265,7 @@ public class ClassPathFeignClientServiceScanner extends ClassPathBeanDefinitionS
         CtClass ctClass = genClientClass(DemoClientImpl.class);
         byte[] byteArr = ctClass.toBytecode();
         FileOutputStream fos = new FileOutputStream(
-                new File("/Users/taosy/Documents/taosy/haixin/myClient.class"));
+            new File("/Users/taosy/Documents/taosy/haixin/myClient.class"));
         fos.write(byteArr);
         fos.close();
         System.out.println("over!!");
