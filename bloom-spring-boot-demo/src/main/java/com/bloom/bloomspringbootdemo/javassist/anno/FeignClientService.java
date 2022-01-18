@@ -2,8 +2,7 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package
-        com.bloom.bloomspringbootdemo.valid;
+package com.bloom.bloomspringbootdemo.javassist.anno;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -18,11 +17,11 @@ import java.lang.annotation.Target;
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE})
+@Target({ ElementType.TYPE })
 @Inherited
-public @interface ResultService {
+public @interface FeignClientService {
 
-    Class<?> serviceClass();
+    Class<?> feignClass();
 
-    Class<?> facadeClass();
+    Class<?> clientClass();
 }

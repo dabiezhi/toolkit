@@ -2,9 +2,12 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package com.bloom.bloomspringbootdemo.valid;
+package com.bloom.bloomspringbootdemo.javassist.demo2;
 
 import javax.validation.Valid;
+
+import com.bloom.bloomspringbootdemo.valid.BaseResult;
+import com.bloom.bloomspringbootdemo.valid.User;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.bind.annotation.GetMapping;

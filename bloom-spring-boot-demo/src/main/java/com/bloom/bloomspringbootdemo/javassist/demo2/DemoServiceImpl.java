@@ -2,9 +2,10 @@
  * Aistarfish.com Inc.
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
-package com.bloom.bloomspringbootdemo.valid;
+package com.bloom.bloomspringbootdemo.javassist.demo2;
 
 import com.alibaba.fastjson.JSON;
+import com.bloom.bloomspringbootdemo.valid.User;
 
 import org.springframework.stereotype.Component;
 
