@@ -1,7 +1,3 @@
-/**
- * Aistarfish.com Inc.
- * Copyright (c) 2017-2022 All Rights Reserved.
- */
 package com.bloom.bloomspringbootdemo.utils;
 
 import java.util.Arrays;

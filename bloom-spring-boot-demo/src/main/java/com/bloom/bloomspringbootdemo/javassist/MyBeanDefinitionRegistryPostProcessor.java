@@ -1,7 +1,3 @@
-/**
- * Aistarfish.com Inc.
- * Copyright (c) 2017-2022 All Rights Reserved.
- */
 package com.bloom.bloomspringbootdemo.javassist;
 
 import org.springframework.beans.BeansException;
