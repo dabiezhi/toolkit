@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bloom</groupId>
-    <artifactId>bloom-spring-boot-demo</artifactId>
+    <artifactId>bloom-spring-boot-mydemo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>bloom-spring-boot-demo</name>
+    <name>bloom-spring-boot-mydemo</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
