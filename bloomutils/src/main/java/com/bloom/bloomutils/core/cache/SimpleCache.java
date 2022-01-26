@@ -7,8 +7,6 @@
  */
 package com.bloom.bloomutils.core.cache;
 
-import cn.hutool.core.lang.func.Func0;
-
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
@@ -23,14 +21,14 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @since 2022-01-07 09:59
  */
 public class SimpleCache<K, V> implements Iterable<Map.Entry<K, V>>, Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long            serialVersionUID = 1L;
 
     /**
      * 池
      */
-    private final Map<K, V> cache;
+    private final Map<K, V>              cache;
     // 乐观读写锁
-    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    private final ReentrantReadWriteLock lock             = new ReentrantReadWriteLock();
 
     /**
      * 构造，默认使用{@link WeakHashMap}实现缓存自动清理
@@ -75,29 +73,29 @@ public class SimpleCache<K, V> implements Iterable<Map.Entry<K, V>>, Serializabl
      * @param supplier 如果不存在回调方法，用于生产值对象
      * @return 值对象
      */
-    public V get(K key, Func0<V> supplier) {
-        V v = get(key);
-
-        if (null == v && null != supplier) {
-            lock.writeLock().lock();
-            try {
-                v = cache.get(key);
-                // 双重检查，防止在竞争锁的过程中已经有其它线程写入
-                if (null == v) {
-                    try {
-                        v = supplier.call();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                    cache.put(key, v);
-                }
-            } finally {
-                lock.writeLock().unlock();
-            }
-        }
-
-        return v;
-    }
+    //    public V get(K key, Func0<V> supplier) {
+    //        V v = get(key);
+    //
+    //        if (null == v && null != supplier) {
+    //            lock.writeLock().lock();
+    //            try {
+    //                v = cache.get(key);
+    //                // 双重检查，防止在竞争锁的过程中已经有其它线程写入
+    //                if (null == v) {
+    //                    try {
+    //                        v = supplier.call();
+    //                    } catch (Exception e) {
+    //                        throw new RuntimeException(e);
+    //                    }
+    //                    cache.put(key, v);
+    //                }
+    //            } finally {
+    //                lock.writeLock().unlock();
+    //            }
+    //        }
+    //
+    //        return v;
+    //    }
 
     /**
      * 放入缓存
