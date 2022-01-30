@@ -22,12 +22,12 @@ class ProducerApplicationTests {
     public void sendMessage() {
         String key = "simple";
         for (int i = 0; i < 1; i++) {
-            String message = "发送同步消息,msg=" + i;
+            String message = "发送同步消息1,msg=" + i;
             /*
             第一个参数，主题名:标签 topicName:tags
             第二个参数：发送对象
              */
-            SendResult sendResult = this.rocketMQTemplate.syncSend(key, message);
+            SendResult sendResult = this.rocketMQTemplate.syncSend(key, message,100000);
             log.info("MQ发送同步消息成功,key={} msg={},sendResult={}", key, message, sendResult);
         }
     }
