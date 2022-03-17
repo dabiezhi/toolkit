@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import com.bloom.autoconfigure.kaptcha.KaptchaRender;
 import com.bloom.bloomspringbootdemo.javassist.demo1.DemoClient;
+import com.bloom.bloomspringbootdemo.utils.ApolloUtils;
 import com.bloom.bloomspringbootdemo.valid.BaseResult;
 import com.bloom.bloomspringbootdemo.javassist.demo2.DemoFacade;
 import com.bloom.bloomspringbootdemo.valid.User;
@@ -12,6 +13,7 @@ import com.bloom.bloomspringbootdemo.valid.User;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @Validated
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class Application {
 
     @Resource
@@ -32,6 +35,7 @@ public class Application {
 
     @RequestMapping(value = "/hello")
     public String hello(@RequestBody @Valid User user) {
+        System.out.println(ApolloUtils.authorLabelKey);
         return kaptchaRender.render();
     }
 
