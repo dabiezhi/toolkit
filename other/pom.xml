@@ -6,9 +6,13 @@
 
   <groupId>com.bloom</groupId>
   <artifactId>other</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>bloom-qingstor</module>
+    </modules>
 
-  <name>other</name>
+    <name>other</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

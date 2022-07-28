@@ -44,6 +44,15 @@ public class Application {
         return BaseResult.success(demoClient.demo(userId));
     }
 
+    @RequestMapping(value = "/arthas")
+    public String arthas(@RequestParam(value = "userId") String userId) {
+        return tt(userId);
+    }
+
+    public String tt(String userId){
+        return userId+"cuchuan";
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
