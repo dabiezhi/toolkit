@@ -446,6 +446,5 @@ public class HttpUtil {
     }
 
     public static void main(String[] args) {
-        me("https://1.189.75.74:5443/sp-uph80k0gmnqg3g5h03xw9w7b2h26/22072610390212037915654.wav?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220726T104020Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=CFD20CAFEDFD43262E2D%2F20220726%2F%2Fs3%2Faws4_request&X-Amz-Signature=326d58d3a7e9e9e079c54a6d3250672d1f35f4c14a3a1ff531348f424898b6ef");
     }
 }

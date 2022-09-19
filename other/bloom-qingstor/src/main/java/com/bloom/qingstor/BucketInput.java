@@ -17,9 +17,7 @@ public class BucketInput {
 
     public static void main(String[] args) {
         Bucket bucket = MyBucket.of();
-        putObjectFetch(bucket,
-            "https://rtcstor-7.huaweirtc.cn:9443/sp-h81xt9hoksxkmhkn5j85qc2gzc3u/22072619095812008532781.wav?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220727T015127Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=E30B0F4EE944341FC4C9%2F20220727%2F%2Fs3%2Faws4_request&X-Amz-Signature=bfa57b267683d40bee1f4853406726a43641f98d625275973b99eca8d2a2b70d",
-            "curry/5.wav");
+        putObjectFetch(bucket, "", "curry/5.wav");
     }
 
     private static void putObjectFetch(Bucket bucket, String fetchSource, String newObjectKey) {
