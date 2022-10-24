@@ -1,42 +1,14 @@
 package com.bloom.bloomspringbootdemo.javassist;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import com.bloom.bloomspringbootdemo.javassist.anno.ResultService;
 import com.bloom.bloomspringbootdemo.javassist.demo2.DemoController;
 import com.bloom.bloomspringbootdemo.valid.Name;
-
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtField;
-import javassist.CtMethod;
-import javassist.CtNewConstructor;
-import javassist.CtNewMethod;
-import javassist.NotFoundException;
+import javassist.*;
 import javassist.bytecode.AnnotationsAttribute;
 import javassist.bytecode.ClassFile;
 import javassist.bytecode.ConstPool;
 import javassist.bytecode.ParameterAnnotationsAttribute;
-import javassist.bytecode.annotation.Annotation;
-import javassist.bytecode.annotation.ArrayMemberValue;
-import javassist.bytecode.annotation.BooleanMemberValue;
-import javassist.bytecode.annotation.ByteMemberValue;
-import javassist.bytecode.annotation.CharMemberValue;
-import javassist.bytecode.annotation.ClassMemberValue;
-import javassist.bytecode.annotation.DoubleMemberValue;
-import javassist.bytecode.annotation.EnumMemberValue;
-import javassist.bytecode.annotation.FloatMemberValue;
-import javassist.bytecode.annotation.IntegerMemberValue;
-import javassist.bytecode.annotation.LongMemberValue;
-import javassist.bytecode.annotation.MemberValue;
-import javassist.bytecode.annotation.ShortMemberValue;
-import javassist.bytecode.annotation.StringMemberValue;
+import javassist.bytecode.annotation.*;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
@@ -50,6 +22,14 @@ import org.springframework.context.annotation.AnnotationBeanNameGenerator;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.util.Assert;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.lang.reflect.Array;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * @author taosy
@@ -92,8 +72,8 @@ public class ClassPathResultServiceScanner extends ClassPathBeanDefinitionScanne
     @SneakyThrows
     protected static CtClass genDubboServiceClass(Class<?> resultDubboServiceClass) {
 
-        //        ClassPool classPool = ClassGenerator.getClassPool(resultDubboServiceClass.getClassLoader());
-        ClassPool classPool = ClassPool.getDefault();
+        ClassPool classPool = ClassGenerator.getClassPool(resultDubboServiceClass.getClassLoader());
+//        ClassPool classPool = ClassPool.getDefault();
         String className = resultDubboServiceClass.getName() + "_ProxyImpl";
         CtClass ctClass = classPool.makeClass(className);
 
