@@ -4,14 +4,15 @@ magic-api:
   #配置web页面入口
   web: /magic/web
   resource:
+    type: database # 配置存储在数据库中
+    tableName: magic_api_file # 数据库中的表名
+#    datasource: bloom #指定数据源（单数据源时无需配置，多数据源时默认使用主数据源，如果存在其他数据源中需要指定。）
+    prefix: /magic-api # key前缀
+    readonly: false # 是否是只读模式
     #配置文件存储位置。当以classpath开头时，为只读模式
     #mac用户请改为可读写的目录
     #如果不想存到文件中，可以参考配置将接口信息存到数据库、Redis中（或自定义）
-    location: /Users/taosy/Documents/bloom/data/magic-api
-  response-code:
-    success: 200 #执行成功的code值
-    invalid: 400 #参数验证未通过的code值
-    exception: 500 #执行出现异常的code值
+#    location: /Users/taosy/Documents/bloom/data/magic-api
   task:
     thread-name-prefix: magic-task- #线程池名字前缀
     pool:
@@ -19,14 +20,6 @@ magic-api:
     shutdown:
       awaitTermination: false #关闭时是否等待任务执行完毕，默认为false
       awaitTerminationPeriod: 10s # 关闭时最多等待任务执行完毕的时间
-# 以下配置均可省略
-  swagger:
-    version: 1.0
-    description: MagicAPI 接口信息
-    title: MagicAPI Swagger Docs
-    name: MagicAPI 接口
-    location: /v2/api-docs/magic-api/swagger2.json
-
 
 spring:
   datasource:
@@ -37,3 +30,7 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  jackson:
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+    date-format: yyyy-MM-dd HH:mm:ss
