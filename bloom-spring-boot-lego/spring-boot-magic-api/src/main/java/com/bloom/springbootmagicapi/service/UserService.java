@@ -2,6 +2,7 @@ package com.bloom.springbootmagicapi.service;
 
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,5 +19,11 @@ public class UserService {
         list.add("汤普森");
         list.add("格林");
         return list;
+    }
+
+    public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Class<UserService> clz= UserService.class;
+        UserService userService = clz.getConstructor().newInstance();
+        System.out.println(userService.userList());
     }
 }
