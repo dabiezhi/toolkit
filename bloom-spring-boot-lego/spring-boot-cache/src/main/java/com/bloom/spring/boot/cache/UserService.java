@@ -12,6 +12,6 @@ public class UserService {
 
     @Cacheable(cacheNames = "user", key = "#name")
     public User get(String name) {
-        return User.builder().name(name).age(18).build();
+        return User.builder().name(name).build();
     }
 }
