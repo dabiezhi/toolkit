@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>tim</name>
     <description>tim</description>
+    <packaging>pom</packaging>
     <properties>
         <java.version>1.8</java.version>
         <junit.version>4.12</junit.version>

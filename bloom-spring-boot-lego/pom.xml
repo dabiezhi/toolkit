@@ -10,6 +10,10 @@
   <version>0.0.1-SNAPSHOT</version>
   <modules>
     <module>spring-boot-mq-rocketmq</module>
+    <module>spring-boot-camel</module>
+    <module>spring-boot-magic-api</module>
+    <module>spring-boot-websocket</module>
+    <module>spring-boot-cache</module>
   </modules>
   <name>bloom-spring-boot-lego</name>
   <!-- FIXME change it to the project's website -->
