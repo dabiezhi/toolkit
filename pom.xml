@@ -7,7 +7,6 @@
 		<module>bloom-spring-boot-lego</module>
         <module>bloom-spring-cloud-lego</module>
 		<module>other</module>
-        <module>spring</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
