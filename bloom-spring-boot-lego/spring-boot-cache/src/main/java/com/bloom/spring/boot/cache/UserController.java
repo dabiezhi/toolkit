@@ -1,8 +1,7 @@
 package com.bloom.spring.boot.cache;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -18,8 +17,8 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @GetMapping("/get")
-    public String get() {
-        return userService.get("库里").toString();
+    @GetMapping("/get/{name}")
+    public String get(@PathVariable("name") String name) {
+        return userService.get(name).toString();
     }
 }
