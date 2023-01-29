@@ -14,6 +14,7 @@
     <module>spring-boot-magic-api</module>
     <module>spring-boot-websocket</module>
     <module>spring-boot-cache</module>
+    <module>spring-boot-ice</module>
   </modules>
   <name>bloom-spring-boot-lego</name>
   <!-- FIXME change it to the project's website -->
