@@ -1,8 +1,4 @@
-/**
- * Aistarfish.com Inc.
- * Copyright (c) 2017-2022 All Rights Reserved.
- */
-package com.bloom;
+package com.bloom.spring.cloud.eureka.client.provider;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

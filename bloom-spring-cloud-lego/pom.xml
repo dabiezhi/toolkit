@@ -28,6 +28,6 @@
   </dependencies>
 
   <modules>
-    <module>spring-cloud-eureka-server7001</module>
+    <module>spring-cloud-eureka-server</module>
   </modules>
 </project>
