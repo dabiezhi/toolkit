@@ -29,5 +29,7 @@
 
   <modules>
     <module>spring-cloud-eureka-server</module>
+    <module>spring-cloud-eureka-client-consumer</module>
+    <module>spring-cloud-eureka-client-provider</module>
   </modules>
 </project>
