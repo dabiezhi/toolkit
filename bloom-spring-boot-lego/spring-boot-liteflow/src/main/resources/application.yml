@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: liteflow-mysql
+
+liteflow:
+  rule-source-ext-data-map:
+    url: jdbc:mysql://localhost:3306/poseidon?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root123456
+    applicationName: demo
+    #???chain???????????
+    chainTableName: chain
+    chainApplicationNameField: application_name
+    chainNameField: chain_name
+    elDataField: el_data
+    #???script??????????????????????
+    scriptTableName: script
+    scriptApplicationNameField: application_name
+    scriptIdField: script_id
+    scriptNameField: script_name
+    scriptDataField: script_data
+    scriptTypeField: script_type
