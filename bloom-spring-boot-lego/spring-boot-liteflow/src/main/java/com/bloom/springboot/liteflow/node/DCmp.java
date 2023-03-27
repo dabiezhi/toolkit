@@ -2,19 +2,20 @@ package com.bloom.springboot.liteflow.node;
 
 import com.yomahub.liteflow.annotation.LiteflowComponent;
 import com.yomahub.liteflow.core.NodeComponent;
+import com.yomahub.liteflow.core.NodeIfComponent;
 import com.yomahub.liteflow.slot.DefaultContext;
 
 /**
  * @author curry
  * Created by on 2023-03-24 4:16 PM
  */
-@LiteflowComponent("a")
-public class ACmp extends NodeComponent {
+@LiteflowComponent("d")
+public class DCmp extends NodeIfComponent {
+
 
     @Override
-    public void process() throws Exception {
-        DefaultContext contextBean = this.getContextBean(DefaultContext.class);
-        contextBean.setData("k1","郭艾伦");
-        System.out.println("ACmp executed!");
+    public boolean processIf() throws Exception {
+        System.out.println("DCmp executed!");
+        return false;
     }
 }
