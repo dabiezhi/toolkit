@@ -12,7 +12,7 @@ public class DemoBean {
 
     @ScriptMethod("demo")
     public Boolean getDemoStr1() {
-        return false;
+        return true;
     }
 
 }
