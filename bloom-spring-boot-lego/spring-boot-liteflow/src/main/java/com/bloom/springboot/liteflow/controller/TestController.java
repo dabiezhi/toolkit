@@ -26,7 +26,7 @@ public class TestController {
     public String get() {
         LiteflowResponse response = flowExecutor.execute2Resp("chain1", "arg", DefaultContext.class);
         DefaultContext context = response.getFirstContextBean();
-        System.out.println(JsonUtil.toJsonString(context.getData("student")));
+        System.out.println(JsonUtil.toJsonString(context.getData("s1")));
         if (response.isSuccess()) {
             System.out.println("执行成功");
         } else {

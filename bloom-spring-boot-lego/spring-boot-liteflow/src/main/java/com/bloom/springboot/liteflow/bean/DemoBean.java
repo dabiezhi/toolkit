@@ -1,5 +1,6 @@
 package com.bloom.springboot.liteflow.bean;
 
+import com.yomahub.liteflow.script.annotation.ScriptBean;
 import com.yomahub.liteflow.script.annotation.ScriptMethod;
 import org.springframework.stereotype.Component;
 
@@ -8,11 +9,15 @@ import org.springframework.stereotype.Component;
  * Created by on 2023-03-27 3:21 PM
  */
 @Component
+@ScriptBean("demo")
 public class DemoBean {
 
-    @ScriptMethod("demo")
-    public Boolean getDemoStr1() {
+    public Boolean getFlag() {
         return true;
+    }
+
+    public String getStr(String str) {
+        return "curry" + str;
     }
 
 }

@@ -43,3 +43,13 @@ def a=3
 def b=2
 defaultContext.setData("s1",a*b)', 'script');
 INSERT INTO poseidon.script (id, application_name, script_id, script_name, script_data, script_type) VALUES (2, 'demo', 's2', '脚本s2', 'defaultContext.setData("s2","hello")', 'script');
+
+
+INSERT INTO `chain` VALUES (1, 'demo', 'chain1', '测试流程1', ' IF(s3, THEN(a.tag(\"tag1\"), b, c, s4), e);', '2022-09-19 19:31:00');
+INSERT INTO `chain` VALUES (2, 'demo', 'chain2', '测试流程2', 'THEN(a, b, c);', '2023-03-29 17:04:19');
+
+INSERT INTO `script` VALUES (1, 'demo', 's1', '脚本s1', 'import cn.hutool.core.date.DateUtil\n\ndef date = DateUtil.parse(\"2022-10-17 13:31:43\")\nprintln(date)\ndefaultContext.setData(\"demoDate\", date)\n\nclass Student {\n   int studentID\n   String studentName\n}\n\nStudent student = new Student()\nstudent.studentID = 100301\nstudent.studentName = \"张三\"\ndefaultContext.setData(\"student\",student)\n\ndef a=3\ndef b=2\ndefaultContext.setData(\"s1\",a*b)', 'script', 'groovy');
+INSERT INTO `script` VALUES (2, 'demo', 's2', '脚本s2', 'defaultContext.setData(\"s2\",\"hello\")', 'script', 'groovy');
+INSERT INTO `script` VALUES (3, 'demo', 's3', '条件脚本', 'return false || demo.getFlag()', 'if_script', 'groovy');
+INSERT INTO `script` VALUES (4, 'demo', 's4', '脚本s4', 'defaultContext.setData(\"s1\",demo.getStr(_meta.requestData))', 'script', 'groovy');
+

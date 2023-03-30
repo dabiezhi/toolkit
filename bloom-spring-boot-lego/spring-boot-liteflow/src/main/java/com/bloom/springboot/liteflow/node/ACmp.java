@@ -15,6 +15,7 @@ public class ACmp extends NodeComponent {
     public void process() throws Exception {
         DefaultContext contextBean = this.getContextBean(DefaultContext.class);
         contextBean.setData("k1","郭艾伦");
+        contextBean.setData("tag",this.getTag());
         System.out.println("ACmp executed!");
     }
 }

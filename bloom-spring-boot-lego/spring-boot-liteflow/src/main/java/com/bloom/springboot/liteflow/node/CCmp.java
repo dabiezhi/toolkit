@@ -15,4 +15,9 @@ public class CCmp extends NodeComponent {
     public void process() throws Exception {
         System.out.println("CCmp executed!");
     }
+
+    @Override
+    public void onSuccess() throws Exception {
+        System.out.println("CCmp onSuccess!");
+    }
 }
