@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class DemoBean {
 
     public Boolean getFlag() {
-        return true;
+        return false;
     }
 
     public String getStr(String str) {

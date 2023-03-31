@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author curry
@@ -24,7 +25,7 @@ public class TestController {
 
     @GetMapping(value = "/get")
     public String get() {
-        LiteflowResponse response = flowExecutor.execute2Resp("chain1", "arg", DefaultContext.class);
+        LiteflowResponse response = flowExecutor.execute2Resp("chain3", "arg", DefaultContext.class);
         DefaultContext context = response.getFirstContextBean();
         System.out.println(JsonUtil.toJsonString(context.getData("s1")));
         if (response.isSuccess()) {
