@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 31/03/2023 18:06:05
+ Date: 01/04/2023 17:28:45
 */
 
 SET NAMES utf8mb4;
@@ -36,7 +36,7 @@ CREATE TABLE `chain` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `chain` VALUES (1, 'demo', 'chain1', '测试流程1', ' IF(d, THEN(a.tag(\"tag1\"), b, c, s4), e);', '2022-09-19 19:31:00');
-INSERT INTO `chain` VALUES (2, 'demo', 'chain2', '测试流程2', 'THEN(a, b, c);', '2023-03-29 17:04:19');
+INSERT INTO `chain` VALUES (2, 'demo', 'chain2', '测试流程2', ' IF(s3, b, c);', '2023-03-29 17:04:19');
 INSERT INTO `chain` VALUES (3, 'demo', 'chain3', '测试流程3', ' IF(d, THEN(IF(f,g,THEN(IF(s3,g,h)))), g);', '2023-03-31 15:25:41');
 COMMIT;
 
