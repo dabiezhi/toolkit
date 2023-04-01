@@ -1,6 +1,9 @@
 package com.bloom.springboot.liteflow.controller;
 
+import com.bloom.springboot.liteflow.component.TScriptIfComponent;
+import com.yomahub.liteflow.builder.LiteFlowNodeBuilder;
 import com.yomahub.liteflow.core.FlowExecutor;
+import com.yomahub.liteflow.enums.NodeTypeEnum;
 import com.yomahub.liteflow.flow.FlowBus;
 import com.yomahub.liteflow.flow.LiteflowResponse;
 import com.yomahub.liteflow.flow.element.Chain;
@@ -25,7 +28,7 @@ public class TestController {
 
     @GetMapping(value = "/get")
     public String get() {
-        LiteflowResponse response = flowExecutor.execute2Resp("chain3", "arg", DefaultContext.class);
+        LiteflowResponse response = flowExecutor.execute2Resp("chain2", "arg", DefaultContext.class);
         DefaultContext context = response.getFirstContextBean();
         System.out.println(JsonUtil.toJsonString(context.getData("s1")));
         if (response.isSuccess()) {
@@ -42,5 +45,5 @@ public class TestController {
         flowExecutor.reloadRule();
         return "";
     }
-    
+
 }

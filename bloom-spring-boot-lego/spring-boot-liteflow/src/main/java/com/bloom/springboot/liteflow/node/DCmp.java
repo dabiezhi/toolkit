@@ -11,7 +11,7 @@ import com.yomahub.liteflow.slot.DefaultContext;
  * Created by on 2023-03-24 4:16 PM
  */
 @LiteflowComponent("d")
-public class DCmp extends NodeIfComponent {
+public class DCmp extends TNodeIfComponent {
 
 
     @Override
