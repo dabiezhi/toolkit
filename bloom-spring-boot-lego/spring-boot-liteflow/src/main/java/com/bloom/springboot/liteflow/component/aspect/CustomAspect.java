@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
  * Created by on 2023-03-31 4:55 PM
  */
 @Aspect
-@Component
+//@Component
 public class CustomAspect {
 
-    @Pointcut("execution(* com.yomahub.liteflow.core.NodeIfComponent.processIf())")
+//    @Pointcut("execution(* com.yomahub.liteflow.core.NodeIfComponent.processIf())")
     public void cut() {
     }
 
@@ -22,11 +22,11 @@ public class CustomAspect {
 //    public void cut() {
 //    }
 
-    @Around("cut()")
-    public Object around(ProceedingJoinPoint jp) throws Throwable {
-        //do before business
-        Object returnObj = jp.proceed();
-        //do after business
-        return returnObj;
-    }
+//    @Around("cut()")
+//    public Object around(ProceedingJoinPoint jp) throws Throwable {
+//        //do before business
+//        Object returnObj = jp.proceed();
+//        //do after business
+//        return returnObj;
+//    }
 }
